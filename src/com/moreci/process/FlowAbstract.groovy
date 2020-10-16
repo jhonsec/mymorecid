@@ -32,12 +32,12 @@ abstract class FlowAbstract {
     //sleep(70000)
     // Exec steps, verify is parallel steps.
     def builders = [:]
-    echo "##########################"
+    root.echo "##########################"
     def propsEnv = this.props[this.parameterBean.getEnvironment()]
     String[] parallels = (propsEnv.parallel) ? propsEnv.parallel.toString().split(",") : []
-    echo "${propsEnv.toString()}"
-    echo "${parallels.toString()}"
-    echo "##########################"
+    root.echo "${propsEnv.toString()}"
+    root.echo "${parallels.toString()}"
+    root.echo "##########################"
     root.dir(parameterBean.getCustomWorkspace(workspace)) {
       steps.eachWithIndex { item, i ->
         if (parallels.contains(stage.id)) {
@@ -60,42 +60,42 @@ abstract class FlowAbstract {
     def stageItems = stage
     def stageDefault = [:]
 
-    echo "##########################"
-    echo "${stage.toString()}"
-    echo "${stageItems.toString()}"
-    echo "##########################"
+    root.echo "##########################"
+    root.echo "${stage.toString()}"
+    root.echo "${stageItems.toString()}"
+    root.echo "##########################"
     // Si tiene varios steps con seteo de default
     if (stage instanceof LinkedHashMap && stage.containsKey("default")) {
-      echo "+++ in:: Si tiene varios steps con seteo de default +++ "
+      root.echo "+++ in:: Si tiene varios steps con seteo de default +++ "
       stageDefault = stage.get("default")
       stageItems = stage.get("steps")
     }
 
     // Si tiene un solo step
     if (stageItems instanceof LinkedHashMap) {
-      echo "+++ in:: Si tiene un solo step +++ "
+      root.echo "+++ in:: Si tiene un solo step +++ "
       items.add(stageItems as LinkedHashMap)
     } // Si tiene varios steps
     else {
-      echo "+++ in:: Si tiene varios steps +++ "
+      root.echo "+++ in:: Si tiene varios steps +++ "
       items = stageItems as ArrayList
     }
-    echo "##########################"
-    echo "${items.toString()}"
-    echo "${stageDefault.toString()}"
-    echo "${stageItems.toString()}"
-    echo "##########################"
+    root.echo "##########################"
+    root.echo "${items.toString()}"
+    root.echo "${stageDefault.toString()}"
+    root.echo "${stageItems.toString()}"
+    root.echo "##########################"
 
     Closure asObject = { Map map ->
-      echo "##########################"
-      echo "${map.toMapString()}"
+      root.echo "##########################"
+      root.echo "${map.toMapString()}"
       def objectInstance
       def stepAttr = stageDefault + map
       def stepTypeEnumKey = this.getStepTypeEnum(stageEnum, stepAttr.type as String)
 
-      echo "${stepAttr.toMapString()}"
-      echo "${stepTypeEnumKey.toString()}"
-      echo "##########################"
+      root.echo "${stepAttr.toMapString()}"
+      root.echo "${stepTypeEnumKey.toString()}"
+      root.echo "##########################"
       if (this.preloadStep.containsKey(stepTypeEnumKey.value)) {
         objectInstance = this.preloadStep.get(stepTypeEnumKey.value)
       } else {
@@ -105,7 +105,7 @@ abstract class FlowAbstract {
       // First attributes
       objectInstance.root = this.root
       stepAttr.each { key, value ->
-        echo "+++ stepAttr :: ${key.toString()} - ${value.toString()} +++"
+        root.echo "+++ stepAttr :: ${key.toString()} - ${value.toString()} +++"
         if (objectInstance.hasProperty(key as String)) {
           objectInstance[key as String] = value
         }
@@ -141,18 +141,18 @@ abstract class FlowAbstract {
   protected void loadProperties() {
     this.props = root.mapper.propsToObject(
       parameterBean.getCustomWorkspace() + "/" + Constants.PROJECT_CONFIG_PATH)
-    echo "##########################"
-    echo "${this.props.toString()}"
-    echo "##########################"
+    root.echo "##########################"
+    root.echo "${this.props.toString()}"
+    root.echo "##########################"
     def propsEnv = this.props[this.parameterBean.getEnvironment()]
-    echo "${propsEnv.toString()}"
-    echo "##########################"
+    root.echo "${propsEnv.toString()}"
+    root.echo "##########################"
     this.stages = propsEnv['stages'] as LinkedHashMap
-    echo "${this.stages.toString()}"
-    echo "##########################"
+    root.echo "${this.stages.toString()}"
+    root.echo "##########################"
     this.stageFlow = propsEnv['flow'].toString().split(",")
-    echo "${stageFlow.toString()}"
-    echo "##########################"
+    root.echo "${stageFlow.toString()}"
+    root.echo "##########################"
   }
 
   FlowAbstract downloadSources() {

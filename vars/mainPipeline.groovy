@@ -4,9 +4,6 @@ import com.moreci.common.NodeLabel
 import com.moreci.common.PipelineNodeLabel
 import com.moreci.enums.PipelineTypeEnum
 
-import hudson.model.*
-System.out = getBinding().out;
-
 def call(body) {
   // Evaluate body closure, and fill the configuration in the object
   def pipelineParams = [:]
