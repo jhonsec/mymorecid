@@ -35,8 +35,8 @@ abstract class FlowAbstract {
     echo "##########################"
     def propsEnv = this.props[this.parameterBean.getEnvironment()]
     String[] parallels = (propsEnv.parallel) ? propsEnv.parallel.toString().split(",") : []
-    echo "${propsEnv}"
-    echo "${parallels}"
+    echo "${propsEnv.toString()}"
+    echo "${parallels.toString()}"
     echo "##########################"
     root.dir(parameterBean.getCustomWorkspace(workspace)) {
       steps.eachWithIndex { item, i ->
@@ -61,8 +61,8 @@ abstract class FlowAbstract {
     def stageDefault = [:]
 
     echo "##########################"
-    echo "${stage}"
-    echo "${stageItems}"
+    echo "${stage.toString()}"
+    echo "${stageItems.toString()}"
     echo "##########################"
     // Si tiene varios steps con seteo de default
     if (stage instanceof LinkedHashMap && stage.containsKey("default")) {
@@ -81,20 +81,20 @@ abstract class FlowAbstract {
       items = stageItems as ArrayList
     }
     echo "##########################"
-    echo "${items}"
-    echo "${stageDefault}"
-    echo "${stageItems}"
+    echo "${items.toString()}"
+    echo "${stageDefault.toString()}"
+    echo "${stageItems.toString()}"
     echo "##########################"
 
     Closure asObject = { Map map ->
       echo "##########################"
-      echo "${map}"
+      echo "${map.toMapString()}"
       def objectInstance
       def stepAttr = stageDefault + map
       def stepTypeEnumKey = this.getStepTypeEnum(stageEnum, stepAttr.type as String)
 
-      echo "${stepAttr}"
-      echo "${stepTypeEnumKey}"
+      echo "${stepAttr.toMapString()}"
+      echo "${stepTypeEnumKey.toString()}"
       echo "##########################"
       if (this.preloadStep.containsKey(stepTypeEnumKey.value)) {
         objectInstance = this.preloadStep.get(stepTypeEnumKey.value)
@@ -105,7 +105,7 @@ abstract class FlowAbstract {
       // First attributes
       objectInstance.root = this.root
       stepAttr.each { key, value ->
-        echo "+++ stepAttr :: ${key} - ${value} +++"
+        echo "+++ stepAttr :: ${key.toString()} - ${value.toString()} +++"
         if (objectInstance.hasProperty(key as String)) {
           objectInstance[key as String] = value
         }
@@ -142,16 +142,16 @@ abstract class FlowAbstract {
     this.props = root.mapper.propsToObject(
       parameterBean.getCustomWorkspace() + "/" + Constants.PROJECT_CONFIG_PATH)
     echo "##########################"
-    echo "${this.props}"
+    echo "${this.props.toString()}"
     echo "##########################"
     def propsEnv = this.props[this.parameterBean.getEnvironment()]
-    echo "${propsEnv}"
+    echo "${propsEnv.toString()}"
     echo "##########################"
     this.stages = propsEnv['stages'] as LinkedHashMap
-    echo "${this.stages}"
+    echo "${this.stages.toString()}"
     echo "##########################"
     this.stageFlow = propsEnv['flow'].toString().split(",")
-    echo "${stageFlow}"
+    echo "${stageFlow.toString()}"
     echo "##########################"
   }
 

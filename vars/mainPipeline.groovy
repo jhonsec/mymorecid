@@ -31,7 +31,7 @@ def call(body) {
   echo "##########################"
   echo "${parameters.toString()}"
   echo "${nodeLabel.toString()}"
-  echo "${pipelineType}"
+  echo "${pipelineType.toString()}"
   echo "##########################"
   "${pipelineType.func}"(parameters, nodeLabel)
 }
