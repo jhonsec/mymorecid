@@ -32,12 +32,12 @@ abstract class FlowAbstract {
     //sleep(70000)
     // Exec steps, verify is parallel steps.
     def builders = [:]
-    println("##########################")
+    echo "##########################"
     def propsEnv = this.props[this.parameterBean.getEnvironment()]
     String[] parallels = (propsEnv.parallel) ? propsEnv.parallel.toString().split(",") : []
-    println(propsEnv)
-    println(parallels)
-    println("##########################")
+    echo "${propsEnv}"
+    echo "${parallels}"
+    echo "##########################"
     root.dir(parameterBean.getCustomWorkspace(workspace)) {
       steps.eachWithIndex { item, i ->
         if (parallels.contains(stage.id)) {
@@ -60,42 +60,42 @@ abstract class FlowAbstract {
     def stageItems = stage
     def stageDefault = [:]
 
-    println("##########################")
-    println(stage)
-    println(stageItems)
-    println("##########################")
+    echo "##########################"
+    echo "${stage}"
+    echo "${stageItems}"
+    echo "##########################"
     // Si tiene varios steps con seteo de default
     if (stage instanceof LinkedHashMap && stage.containsKey("default")) {
-      println("+++ in:: Si tiene varios steps con seteo de default +++ ")
+      echo "+++ in:: Si tiene varios steps con seteo de default +++ "
       stageDefault = stage.get("default")
       stageItems = stage.get("steps")
     }
 
     // Si tiene un solo step
     if (stageItems instanceof LinkedHashMap) {
-      println("+++ in:: Si tiene un solo step +++ ")
+      echo "+++ in:: Si tiene un solo step +++ "
       items.add(stageItems as LinkedHashMap)
     } // Si tiene varios steps
     else {
-      println("+++ in:: Si tiene varios steps +++ ")
+      echo "+++ in:: Si tiene varios steps +++ "
       items = stageItems as ArrayList
     }
-    println("##########################")
-    println(items)
-    println(stageDefault)
-    println(stageItems)
-    println("##########################")
+    echo "##########################"
+    echo "${items}"
+    echo "${stageDefault}"
+    echo "${stageItems}"
+    echo "##########################"
 
     Closure asObject = { Map map ->
-      println("##########################")
-      println(map)
+      echo "##########################"
+      echo "${map}"
       def objectInstance
       def stepAttr = stageDefault + map
       def stepTypeEnumKey = this.getStepTypeEnum(stageEnum, stepAttr.type as String)
 
-      println(stepAttr)
-      println(stepTypeEnumKey)
-      println("##########################")
+      echo "${stepAttr}"
+      echo "${stepTypeEnumKey}"
+      echo "##########################"
       if (this.preloadStep.containsKey(stepTypeEnumKey.value)) {
         objectInstance = this.preloadStep.get(stepTypeEnumKey.value)
       } else {
@@ -105,7 +105,7 @@ abstract class FlowAbstract {
       // First attributes
       objectInstance.root = this.root
       stepAttr.each { key, value ->
-        println("+++ stepAttr :: ${key} - ${value} +++")
+        echo "+++ stepAttr :: ${key} - ${value} +++"
         if (objectInstance.hasProperty(key as String)) {
           objectInstance[key as String] = value
         }
@@ -141,18 +141,18 @@ abstract class FlowAbstract {
   protected void loadProperties() {
     this.props = root.mapper.propsToObject(
       parameterBean.getCustomWorkspace() + "/" + Constants.PROJECT_CONFIG_PATH)
-    println("##########################")
-    println(this.props)
-    println("##########################")
+    echo "##########################"
+    echo "${this.props}"
+    echo "##########################"
     def propsEnv = this.props[this.parameterBean.getEnvironment()]
-    println(propsEnv)
-    println("##########################")
+    echo "${propsEnv}"
+    echo "##########################"
     this.stages = propsEnv['stages'] as LinkedHashMap
-    println(this.stages)
-    println("##########################")
+    echo "${this.stages}"
+    echo "##########################"
     this.stageFlow = propsEnv['flow'].toString().split(",")
-    println(stageFlow)
-    println("##########################")
+    echo "${stageFlow}"
+    echo "##########################"
   }
 
   FlowAbstract downloadSources() {
