@@ -40,7 +40,7 @@ def call(ParameterBean parameterBean, NodeLabel nodeLabel) {
             parameterBean.setEnvironment(params.ENV)
             parameterBean.setTeam(params.TEAM)
             echo "##########################"
-            echo "${parameterBean}"
+            echo "${parameterBean.toString()}"
             echo "##########################"
             pipelineFlow = new PipelineFlow(root: this, parameterBean: parameterBean)
             pipelineFlow.downloadSources().init()

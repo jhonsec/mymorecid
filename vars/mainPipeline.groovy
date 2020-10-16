@@ -29,8 +29,8 @@ def call(body) {
   PipelineTypeEnum pipelineType = parameters.getType() as PipelineTypeEnum
   NodeLabel nodeLabel = PipelineNodeLabel.getItem(pipelineType)
   echo "##########################"
-  echo "${parameters}"
-  echo "${nodeLabel}"
+  echo "${parameters.toString()}"
+  echo "${nodeLabel.toString()}"
   echo "${pipelineType}"
   echo "##########################"
   "${pipelineType.func}"(parameters, nodeLabel)
