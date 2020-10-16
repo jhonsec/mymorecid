@@ -22,8 +22,8 @@ class ParameterBean {
     def customWorkspace = workspace ?: this.workspace
     def suffixPath = this.getWorkspaceSuffixPath()
     customWorkspace += (suffixPath) ? "/${suffixPath}" : ""
-    println "${customWorkspace.toString()}"
-    println "${suffixPath.toString()}"
+    System.out.println("*** ${customWorkspace.toString()}")
+    System.out.println("*** ${suffixPath.toString()}")
     return customWorkspace
   }
 
