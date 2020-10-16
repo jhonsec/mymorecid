@@ -4,6 +4,8 @@ import com.moreci.enums.StageEnum
 import com.moreci.process.FlowAbstract
 import com.moreci.process.PipelineFlow
 
+import hudson.model.*
+System.out = getBinding().out;
 
 def call(ParameterBean parameterBean, NodeLabel nodeLabel) {
   String defaultBranch = parameterBean.getBranch();
