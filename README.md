@@ -2,7 +2,7 @@
 
 - [x] co step
 - [x] ut step
-- [ ] sc step
+- [x] sc step
 - [ ] bu step
 - [ ] pu step
 - [ ] pk step
