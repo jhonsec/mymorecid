@@ -4,6 +4,6 @@
 - [x] ut step
 - [x] sc step
 - [x] bu step
-- [ ] pu step
+- [x] pu step
 - [ ] pk step
 - [ ] de step
