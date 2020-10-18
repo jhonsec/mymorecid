@@ -15,7 +15,8 @@ class SonarScannerStep extends StepAbstract {
       }
     }
     //root.hygieiaSonarPublishStep ceQueryIntervalInSeconds: '10', ceQueryMaxAttempts: '30'
-    root.hygieiaCodeQualityPublishStep jacocoFilePattern: './target/jacoco.exec'
-    root.hygieiaCodeQualityPublishStep jacocoFilePattern: './target/site/jacoco/jacoco.xml'
+//    root.hygieiaCodeQualityPublishStep jacocoFilePattern: './target/jacoco.exec'
+//    root.hygieiaCodeQualityPublishStep jacocoFilePattern: './target/site/jacoco/jacoco.xml' // LINUX
+    root.hygieiaCodeQualityPublishStep jacocoFilePattern: 'target/site/jacoco/jacoco.xml'
   }
 }
