@@ -11,8 +11,6 @@ class AzureAksStep extends StepAbstract {
 
     @Override
     void run() {
-        root.sh "pwd"
-        root.sh "tree ."
         if (!(root.fileExists(this.pomPath))) {
             // for gradle - required publish
             this.pomPath = 'build/poms/pom-default.xml'

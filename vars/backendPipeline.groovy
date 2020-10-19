@@ -67,7 +67,7 @@ def call(ParameterBean parameterBean, NodeLabel nodeLabel) {
         steps { script { pipelineFlow.runStage(StageEnum.PACKAGE) } }
       }
       stage('Delivery') {
-        agent { label nodeLabel.getValue(StageEnum.DELIVERY) }
+        // agent { label nodeLabel.getValue(StageEnum.DELIVERY) }
         when { expression { return pipelineFlow.hasStage(StageEnum.DELIVERY) } }
         steps { script { pipelineFlow.runStage(StageEnum.DELIVERY) } }
       }
