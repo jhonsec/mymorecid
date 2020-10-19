@@ -117,9 +117,10 @@ class MavenDockerPushStep extends StepAbstract {
             root.echo "Creando primera version de imagen LATEST"
         }
         def dockerImage = root.docker.build(imageName, buildParams)
-        dockerImage.inside {
-            root.println "Tests passed"
-        }
+//        TODO fix windows error: jenkins-pipeline-issue-with-docker-working-directory-is-invalid
+//        dockerImage.inside {
+//            root.println "Tests passed"
+//        }
         root.docker.withRegistry("https://${this.registry}", this.credential) {
             dockerImage.push("${version}")
             dockerImage.push("latest")
