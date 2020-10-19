@@ -4,6 +4,7 @@ import com.moreci.steps.CommandStep
 import com.moreci.steps.SonarScannerStep
 import com.moreci.steps.TestUnitGradleStep
 import com.moreci.steps.TestUnitStep
+import com.moreci.steps.azure.AzureAksStep
 import com.moreci.steps.backend.GradleBuildStep
 import com.moreci.steps.backend.GradlePromoteStep
 import com.moreci.steps.backend.GradlePublishStep
@@ -44,8 +45,8 @@ enum StepTypeEnum {
   /** PACKAGE **/
   PACKAGE_MAVEN_DOCKER(MavenDockerPushStep.class),
   /** DELIVERY **/
+  DELIVERY_AZURE_AKS(AzureAksStep.class),
 //  DELIVERY_AZURE_GIT(AzureGitPush.class),
-//  DELIVERY_AZURE_AKS(AzureAks.class),
   /** ROLLBACK **/
 //  ROLLBACKB_ROLLBACK(Rollbackb.class),
 //  ROLLBACKF_ROLLBACK(Rollbackf.class)

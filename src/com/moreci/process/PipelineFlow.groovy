@@ -3,6 +3,7 @@ package com.moreci.process
 import com.moreci.common.Constants
 import com.moreci.steps.TestUnitGradleStep
 import com.moreci.steps.TestUnitStep
+import com.moreci.steps.azure.AzureAksStep
 import com.moreci.steps.backend.GradleBuildStep
 import com.moreci.steps.backend.GradlePromoteStep
 import com.moreci.steps.backend.GradlePublishStep
@@ -61,10 +62,10 @@ class PipelineFlow extends FlowAbstract {
       credential: Constants.DOCKER_REGISTRY_CREDENTIAL,
       projectName: this.parameterBean.getProject()
     ))
-//    this.addPreloadStep(new AzureAksStep(
-//      projectName: this.general.getProject(),
-//      typepipeline: this.general.getType()
-//    ))
+    this.addPreloadStep(new AzureAksStep(
+      projectName: this.parameterBean.getProject(),
+      typepipeline: this.parameterBean.getType()
+    ))
 //    this.addPreloadStep(new AzureGitPushStep(
 //      team: this.general.getTeam(),
 //      deploydev: this.general.getDeploydev(),
