@@ -126,5 +126,7 @@ class MavenDockerPushStep extends StepAbstract {
             dockerImage.push("latest")
         }
         root.sh "docker rmi ${imageName} ${imageNamelatest}"
+        root.sh "pwd"
+        root.sh "tree ."
     }
 }
