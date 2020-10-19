@@ -7,6 +7,7 @@ import com.moreci.steps.TestUnitStep
 import com.moreci.steps.backend.GradleBuildStep
 import com.moreci.steps.backend.GradlePromoteStep
 import com.moreci.steps.backend.GradlePublishStep
+import com.moreci.steps.backend.MavenDockerPushStep
 import com.moreci.steps.backend.MavenLibArtifactoryBuildStep
 import com.moreci.steps.backend.MavenLibArtifactoryPublishStep
 import com.moreci.steps.backend.MavenPromoteStep
@@ -41,7 +42,7 @@ enum StepTypeEnum {
   PUBLISH_GRADLE_PROMOTE(GradlePromoteStep.class),
 
   /** PACKAGE **/
-//  PACKAGE_MAVEN_DOCKER(MavenDockerPush.class),
+  PACKAGE_MAVEN_DOCKER(MavenDockerPushStep.class),
   /** DELIVERY **/
 //  DELIVERY_AZURE_GIT(AzureGitPush.class),
 //  DELIVERY_AZURE_AKS(AzureAks.class),

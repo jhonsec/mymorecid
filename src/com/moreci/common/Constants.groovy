@@ -6,6 +6,8 @@ class Constants {
   static String ARTIFACTORY_SERVER_ID = "Artifactory"
   static String PROJECT_CONFIG_PATH = "cfg/devops.properties"
 
-  static String AZURE_REGISTRY = "acrgenesis.azurecr.io"
-  static String AZURE_REGISTRY_CREDENTIAL = "AzureContainerRegistry"
+//  static String AZURE_REGISTRY = "acrgenesis.azurecr.io"
+//  static String AZURE_REGISTRY_CREDENTIAL = "AzureContainerRegistry"
+  static String DOCKER_REGISTRY = "docker.io/mmorepan"  // TODO parametrized user
+  static String DOCKER_REGISTRY_CREDENTIAL = "DockerHubContainerRegistry"
 }

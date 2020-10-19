@@ -6,6 +6,7 @@ import com.moreci.steps.TestUnitStep
 import com.moreci.steps.backend.GradleBuildStep
 import com.moreci.steps.backend.GradlePromoteStep
 import com.moreci.steps.backend.GradlePublishStep
+import com.moreci.steps.backend.MavenDockerPushStep
 import com.moreci.steps.backend.MavenLibArtifactoryBuildStep
 import com.moreci.steps.backend.MavenLibArtifactoryPublishStep
 import com.moreci.steps.backend.MavenPromoteStep
@@ -54,12 +55,12 @@ class PipelineFlow extends FlowAbstract {
     ))
 
     /** DOCKER - AKS **/
-//    this.addPreloadStep(new MavenDockerPushStep(
-//      serverId: TdpConstants.ARTIFACTORY_SERVER_ID,
-//      registry: TdpConstants.AZURE_REGISTRY,
-//      credential: TdpConstants.AZURE_REGISTRY_CREDENTIAL,
-//      projectName: this.general.getProject()
-//    ))
+    this.addPreloadStep(new MavenDockerPushStep(
+      serverId: Constants.ARTIFACTORY_SERVER_ID,
+      registry: Constants.DOCKER_REGISTRY,
+      credential: Constants.DOCKER_REGISTRY_CREDENTIAL,
+      projectName: this.parameterBean.getProject()
+    ))
 //    this.addPreloadStep(new AzureAksStep(
 //      projectName: this.general.getProject(),
 //      typepipeline: this.general.getType()
